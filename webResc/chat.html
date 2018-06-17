@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>SagwaTalk · Burrily</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
+    <link rel="stylesheet" href="https://assets.burri.ly/raw/uikit/3.0.0-b40/uikit.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:100,300,400,800,800i" rel="stylesheet">
+    <link href="https://assets.burri.ly/raw/sagwa/sagwa.css" rel="stylesheet">
+    <script src="https://assets.burri.ly/raw/uikit/3.0.0-b40/uikit.min.js"></script>
+    <script src="https://assets.burri.ly/raw/uikit/3.0.0-b40/uikit-icons.min.js"></script>
+</head>
+
+<body>
+    <article class="uk-section">
+        <header class="uk-container uk-position-relative">
+            <h4 class="uk-heading-secondary">Burrily</h4>
+            <h1 class="uk-heading-primary uk-inline">Sagwa</h1>
+            <p id="people-count" class="uk-text-small uk-inline">
+                loading...
+            </p>
+            <div id="call-line">
+                <a id="call-modal-opener" href="#call-init" uk-toggle><span class="uk-position-right uk-margin-large-right uk-margin-top" uk-icon="icon: receiver; ratio: 2" uk-tooltip="Make a Call"></span></a>
+            </div>
+        </header>
+        <main class="uk-margin uk-container">
+            <section class="uk-position-relative" uk-height-viewport="expand: true">
+                <div id="video-log" class="uk-position-relative">
+                </div>
+                <div id="chat-log" class="uk-position-absolute">
+                </div>
+            </section>
+            <section id="my-line" uk-grid>
+                <a id="my-name" class="uk-margin-auto uk-margin-auto-vertical uk-width-auto uk-inline" href="#my-name-change" uk-toggle>YourName<span uk-icon="pencil"></span></a>
+                <input id="my-chat" class="uk-margin-auto uk-width-expand uk-input uk-inline" type="text" placeholder="How are you today?">
+                <button id="my-send" class="uk-margin-auto uk-width-auto uk-button uk-button-primary uk-inline">Send</button>
+            </section>
+        </main>
+        <footer class="uk-margin uk-container">
+            <span class="uk-text-meta">&copy; Doyeon Kim & Jio Gim, All rights reserved.</span>
+        </footer>
+    </article>
+    <div id="call-init" class="uk-flex-top" uk-modal esc-close bg-close>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+            <h2 class="uk-modal-title">Make a call</h2>
+            <p class="uk-margin-remove">Enter the callee's name below.</p>
+            <p id="callee-name-is-empty" class="uk-hidden uk-margin-remove uk-text-danger">Name cannot be blank.</p>
+            <p id="callee-name-is-too-long" class="uk-hidden uk-margin-remove uk-text-danger">Name must be less than 30 characters.</p>
+            <p id="callee-name-is-invalid" class="uk-hidden uk-margin-remove uk-text-danger">The name does not exist on this room.</p>
+            <p id="callee-name-is-same" class="uk-hidden uk-margin-remove uk-text-danger">It's yourself's name!</p>
+            <div class="uk-margin uk-fieldset">
+                <input id="callee-name" class="uk-input" type="text" placeholder="Callee Name" list="callee-list">
+                <datalist id="callee-list"></datalist>
+            </div>
+            <p class="uk-text-right">
+                <span id="call-modal-spinner" class="uk-hidden" uk-spinner></span>
+                <button id="call-modal-close" class="uk-button uk-button-default uk-modal-close">Close</button>
+                <button id="call-audio-start" class="uk-button uk-button-secondary">Audio<span class="uk-hidden"> Call Start</span></button>
+                <button id="call-video-start" class="uk-button uk-button-secondary">Video<span class="uk-hidden"> Call Start</span></button>
+            </p>
+        </div>
+    </div>
+    <div id="my-name-change" class="uk-flex-top" uk-modal esc-close bg-close>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+            <h2 class="uk-modal-title">Change Name</h2>
+            <p class="uk-margin-remove">Enter your new name below.</p>
+            <p id="my-new-name-is-empty" class="uk-hidden uk-margin-remove uk-text-danger">Name cannot be blank.</p>
+            <p id="my-new-name-is-too-long" class="uk-hidden uk-margin-remove uk-text-danger">Name must be less than 30 characters.</p>
+            <p id="my-new-name-is-same" class="uk-hidden uk-margin-remove uk-text-danger">New name is same with now.</p>
+            <p id="my-new-name-is-marked" class="uk-hidden uk-margin-remove uk-text-danger">Entered name is already in use. Use another one.</p>
+            <div class="uk-margin uk-fieldset">
+                <input id="my-new-name" class="uk-input" type="text" placeholder="Name">
+            </div>
+            <p class="uk-text-right">
+                <span id="my-new-name-modal-spinner" class="uk-hidden" uk-spinner></span>
+                <button id="my-new-name-modal-close" class="uk-button uk-button-default uk-modal-close">Close</button>
+                <button id="my-new-name-submit" class="uk-button uk-button-secondary">Change</button>
+            </p>
+        </div>
+    </div>
+    <script src="https://assets.burri.ly/raw/library/jquery.min-3.3.1.js"></script>
+    <script src="https://assets.burri.ly/raw/library/socket.io-2.1.0.js"></script>
+    <script src="https://assets.burri.ly/raw/library/RTCMultiConnection.min-3.4.4.js"></script>
+    <script src="https://assets.burri.ly/raw/sagwa/sagwa.js"></script>
+    <script src="https://assets.burri.ly/raw/sagwa/sagwa-dom.js"></script>
+    <script src="https://assets.burri.ly/raw/sagwa/sagwa-call.js"></script>
+    <script src="https://assets.burri.ly/raw/sagwa/signal.js"></script>
+    <script src="https://assets.burri.ly/raw/sagwa/signal-call.js"></script>
+</body>
+
+</html>
